@@ -1,13 +1,18 @@
+if (__DEV__) {
+  import('./src/config/ReactotronConfig');
+}
 import 'react-native-gesture-handler';
 import * as React from 'react';
+import {Provider} from 'react-redux';
+import store from './src/store';
 
-import {Text, View} from 'react-native';
-
-import TestSas from './src/navigations'
+import TestSas from './src/navigations';
 
 const App = () => {
   return (
-    <TestSas/>
+    <Provider store={store}>
+      <TestSas />
+    </Provider>
   );
 };
 
