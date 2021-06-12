@@ -56,16 +56,16 @@ export default function reducer(state = INITIAL_STATE, {type, payload}) {
       const {category} = payload;
       return {
         ...state,
-        categoryBeingAnswered: category,
+        selectedCategory: category,
       };
     }
     case Types.SET_UNANSWERED_QUESTIONS: {
-      const {newUnansweredQuestions} = payload;
+      const {newUnansweredQuestion} = payload;
       return {
         ...state,
         unansweredQuestions: [
           ...state.unansweredQuestions,
-          newUnansweredQuestions,
+          newUnansweredQuestion,
         ],
       };
     }
@@ -94,13 +94,14 @@ export const asyncSetAnsweredQuestionsAmountByCategory = category => ({
   payload: {category},
 });
 
-export const setUnansweredQuestions = newUnansweredQuestions => ({
+export const setUnansweredQuestions = newUnansweredQuestion => ({
   type: Types.SET_UNANSWERED_QUESTIONS,
-  payload: {newUnansweredQuestions},
+  payload: {newUnansweredQuestion},
 });
 
-export const asyncSetUnansweredQuestions = () => ({
-  type: Types.SET_UNANSWERED_QUESTIONS,
+export const asyncSetUnansweredQuestions = newUnansweredQuestion => ({
+  type: Types.ASYNC_SET_UNANSWERED_QUESTIONS,
+  payload: {newUnansweredQuestion},
 });
 
 export const setAnswers = answers => ({
@@ -119,7 +120,7 @@ export const asyncSetAnswers = (
   payload: {answer, difficulty, rightAnswer, date, answerWasRight},
 });
 
-export const setCategoryBeingAnswered = category => ({
+export const setSelectedCategory = category => ({
   type: Types.SET_SELECTED_CATEGORY,
   payload: {category},
 });

@@ -20,9 +20,19 @@ function* asyncSetCategories() {
   }
 }
 
-function* asyncSetUnansweredQuestions(newUnansweredQuestion) {
-  const {selectedCategory} = yield select(state => state.questions);
-  yield put(setUnansweredQuestions(newUnansweredQuestion));
+function* asyncSetUnansweredQuestions({payload}) {
+  const {newUnansweredQuestion} = payload;
+  try {
+    const newDownloadedQuestion = yield call(
+      baseRequest,
+      false,
+      newUnansweredQuestion,
+      'medium',
+    );
+    yield put(setUnansweredQuestions(newDownloadedQuestion.results));
+  } catch (error) {
+    reactotron.log('err on download categories', error.message);
+  }
 }
 const sagas = [
   takeEvery(questionTypes.ASYNC_SET_CATEGORIES, asyncSetCategories),

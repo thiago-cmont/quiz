@@ -1,11 +1,21 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+
+import {useSelector} from 'react-redux';
+
+import DifficultyBadge from '../../components/DifficultyBadge';
+import {findObjOnArrWithId} from '../../utils/findCategory';
+import * as S from './styles';
 
 const Question = () => {
+  const {categories, selectedCategory} = useSelector(state => state.questions);
+  const category = findObjOnArrWithId(categories, selectedCategory);
   return (
-    <View>
-      <Text>Questões</Text>
-    </View>
+    <S.Container>
+      <S.HeaderWrapper>
+        <S.Title>Question {category.answeredAmount + 1}</S.Title>
+        <DifficultyBadge />
+      </S.HeaderWrapper>
+    </S.Container>
   );
 };
 

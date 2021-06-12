@@ -8,7 +8,6 @@ const baseRequest = async (isCategories, category, difficulty) => {
   const res = await api.get(
     `api.php?amount=1&category=${category}&difficulty=${difficulty}&type=multiple`,
   );
-
   return res.data;
 };
 
