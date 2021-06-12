@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const Types = {
   SET_CATEGORIES: 'SET_CATEGORIES',
   ASYNC_SET_CATEGORIES: 'ASYNC_SET_CATEGORIES',
@@ -7,29 +9,66 @@ export const Types = {
     'ASYNC_SET_ANSWERED_QUESTIONS_AMOUNT_BY_CATEGORY ',
   SET_UNANSWERED_QUESTIONS: 'SET_UNANSWERED_QUESTIONS',
   ASYNC_SET_UNANSWERED_QUESTIONS: 'ASYNC_SET_UNANSWERED_QUESTIONS',
-  SET_ANSWERED_QUESTIONS: 'SET_ANSWERED_QUESTIONS',
-  ASYNC_SET_ANSWERED_QUESTIONS: 'ASYNC_SET_ANSWERED_QUESTIONS',
   SET_ANSWERS: 'SET_ANSWERS',
   ASYNC_SET_ANSWERS: 'ASYNC_SET_ANSWERS',
+  SET_SELECTED_CATEGORY: 'SET_SELECTED_CATEGORY',
 };
 
 const INITIAL_STATE = {
   categories: [],
-  answeredQuestionsAmountByCategory: [],
+  answeredAmount: 0,
+  difficulties: {
+    easy: {
+      right: 0,
+      wrong: 0,
+    },
+    medium: {
+      right: 0,
+      wrong: 0,
+    },
+    hard: {
+      right: 0,
+      wrong: 0,
+    },
+  },
+  selectedCategory: null,
   unansweredQuestions: [],
-  answeredQuestions: [],
   answers: [],
 };
 
 export default function reducer(state = INITIAL_STATE, {type, payload}) {
   switch (type) {
-    case Types.SHOW_ALERT:
+    case Types.SET_CATEGORIES: {
+      const {categories} = payload;
+      const difficulties = _.cloneDeep(state.difficulties);
+      const {answeredAmount} = state;
+      const newCategories = categories.map(arr => ({
+        ...arr,
+        difficulties,
+        answeredAmount,
+      }));
       return {
-        alertProps: payload.alertProps,
-        alertType: payload.alertType,
+        ...state,
+        categories: newCategories,
       };
-    case Types.HIDE_ALERT:
-      return INITIAL_STATE;
+    }
+    case Types.SET_SELECTED_CATEGORY: {
+      const {category} = payload;
+      return {
+        ...state,
+        categoryBeingAnswered: category,
+      };
+    }
+    case Types.SET_UNANSWERED_QUESTIONS: {
+      const {newUnansweredQuestions} = payload;
+      return {
+        ...state,
+        unansweredQuestions: [
+          ...state.unansweredQuestions,
+          newUnansweredQuestions,
+        ],
+      };
+    }
     default:
       return state;
   }
@@ -55,24 +94,13 @@ export const asyncSetAnsweredQuestionsAmountByCategory = category => ({
   payload: {category},
 });
 
-export const setUnansweredQuestions = unansweredQuestions => ({
+export const setUnansweredQuestions = newUnansweredQuestions => ({
   type: Types.SET_UNANSWERED_QUESTIONS,
-  payload: {unansweredQuestions},
+  payload: {newUnansweredQuestions},
 });
 
-export const asyncSetUnansweredQuestions = (category, unansweredQuestion) => ({
+export const asyncSetUnansweredQuestions = () => ({
   type: Types.SET_UNANSWERED_QUESTIONS,
-  payload: {category, unansweredQuestion},
-});
-
-export const setAnsweredQuestions = answeredQuestions => ({
-  type: Types.SET_ANSWERED_QUESTIONS,
-  payload: {answeredQuestions},
-});
-
-export const asyncSetAnsweredQuestions = (category, answeredQuestion) => ({
-  type: Types.SET_ANSWERED_QUESTIONS,
-  payload: {category, answeredQuestion},
 });
 
 export const setAnswers = answers => ({
@@ -89,4 +117,9 @@ export const asyncSetAnswers = (
 ) => ({
   type: Types.SET_ANSWERS,
   payload: {answer, difficulty, rightAnswer, date, answerWasRight},
+});
+
+export const setCategoryBeingAnswered = category => ({
+  type: Types.SET_SELECTED_CATEGORY,
+  payload: {category},
 });

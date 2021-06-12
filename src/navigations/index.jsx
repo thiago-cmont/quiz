@@ -1,21 +1,20 @@
 import 'react-native-gesture-handler';
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {useDispatch} from 'react-redux';
 
 import {MAIN_STACK} from '../constants/routeNames';
+import {asyncSetCategories} from '../store/ducks/questions';
 import Main from './stackNavigators/Main';
 
 const Stack = createStackNavigator();
 
 const TestSas = () => {
-  const didMount = useRef(false);
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (!didMount.current) {
-      didMount.current = true;
-    }
+    dispatch(asyncSetCategories());
   }, []);
 
   return (
