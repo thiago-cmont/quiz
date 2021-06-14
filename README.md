@@ -1,16 +1,16 @@
 # test_sas
 
 - [JavaScript;](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
-- [React Native;](https://reactnative.dev/)
+- [React Native - v0.64;](https://reactnative.dev/)
 - [React Hooks;](https://pt-br.reactjs.org/docs/hooks-intro.html)
-- [Styled Components;](https://styled-components.com/)
-- [Redux;](https://redux.js.org/)
-- [Redux Saga;](https://redux-saga.js.org/)
+- [Styled Components - v5.3;](https://styled-components.com/)
+- [Redux - v7.2;](https://redux.js.org/)
+- [Redux Saga - v1.1;](https://redux-saga.js.org/)
 - [Git como ferramenta de versionamento;](https://git-scm.com/doc)
-- [Yarn;](https://classic.yarnpkg.com/en/docs/)
+- [Yarn - v1.22;](https://classic.yarnpkg.com/en/docs/)
 - [Android Studio](https://git-scm.com/doc) para configurações do emulador Android;
 - [VsCode](https://code.visualstudio.com/) como IDE de desenvolvimento;
-- [Reactotron](https://github.com/infinitered/reactotron) para debug;
+- [Reactotron - v3.0](https://github.com/infinitered/reactotron) para debug;
 
 ## AMBIENTE REACT NATIVE
 
