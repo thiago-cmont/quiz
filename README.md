@@ -69,7 +69,6 @@ Algumas delas:
   `$ yarn`
 
 - Configure o Reactotron:
-
   - Na raiz do projeto, no arquivo **.env**, e apontar o seu endereço de IP para a variável **REACTOTRON_IP=**
     Exemplo: `REACTOTRON_IP=SeuIpAqui`
 
