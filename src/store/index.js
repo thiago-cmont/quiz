@@ -14,7 +14,7 @@ export const persistConfig = {
   debounce: 0.1,
   blacklist: [],
 };
-
+// Configuration fo the redux persist
 const persistedReducer = persistReducer(persistConfig, reducers);
 const sagaMonitor = __DEV__ ? reactotron.createSagaMonitor() : null;
 const sagaMiddleware = createSagaMiddleware({sagaMonitor});

@@ -11,23 +11,22 @@
 - [Android Studio](https://git-scm.com/doc) para configurações do emulador Android;
 - [VsCode](https://code.visualstudio.com/) como IDE de desenvolvimento;
 - [Reactotron](https://github.com/infinitered/reactotron) para debug;
-- [XCode](https://developer.apple.com/xcode/) para gerar versões para loja Apple e desenvolvimento de funcionalidades nativas IOS ;
 
 ## AMBIENTE REACT NATIVE
 
-|     Windows      |      Linux       |      MacOS       |
-| :--------------: | :--------------: | :--------------: |
-|      NodeJS      |      NodeJS      |      NodeJS      |
-|      JDK 8       |      JDK 8       |      JDK 8       |
-|   SDK Android    |   SDK Android    |   SDK Android    |
-| React Native CLI | React Native CLI | React Native CLI |
-|   SDK Android    |   SDK Android    |   SDK Android    |
-|    Chocolatey    |        -         |        -         |
-|        -         |       CURL       |        -         |
-|      Python      |        -         |        -         |
-|        -         |     Watchman     |     Watchman     |
+|     Windows      |      Linux       |
+| :--------------: | :--------------: |
+|      NodeJS      |      NodeJS      |
+|      JDK 8       |      JDK 8       |
+|   SDK Android    |   SDK Android    |
+| React Native CLI | React Native CLI |
+|   SDK Android    |   SDK Android    |
+|    Chocolatey    |        -         |
+|        -         |       CURL       |
+|      Python      |        -         |
+|        -         |     Watchman     |
 
-Com o intuito de não extender, nem deixar o tutoriol repetitivo, separamos um artigo da [Rocketseat](https://rocketseat.com.br/), para auxiliar na instalação de todo o ambiente React Native citado.
+Com o intuito de não extender, nem deixar o tutoriol repetitivo, separei um artigo da [Rocketseat](https://rocketseat.com.br/), para auxiliar na instalação de todo o ambiente React Native citado.
 
 ## CONFIGURAÇÃO ANDROID STUDIO
 
@@ -39,29 +38,26 @@ Após a instalação, é necessário a [criação do emuladador](https://develop
 
 ## BRANCHES
 
-- **feature/**: prefixo para o desenvolvimento de toda funcionalidade, junto ao código da atividade no JIRA. Ex: feature/MHC10-12
+- **feature/**: prefixo para o desenvolvimento de toda funcionalidade.
 
 - [**develop**] branch que servirá de base para a criação de novas funcionalidades.
-
-**Todas as branches de feature devem partir da develop.**
 
 ## SCRIPTS DO PROJETO
 
 Todos os scripts podem ser vistos no arquivo _package.json_, na raiz do projeto.
 Algumas delas:
 
-- **android:dev**: "ENVFILE=.env.dev react-native run-android",
-- **win-android:dev**: "SET ENVFILE=.env.dev && react-native run-android",
-- ** release:dev**: "cd android && ENVFILE=.env.dev ./gradlew app:assembleRelease",
-- **win-release:dev**: "cd android && SET ENVFILE=.env.dev && ./gradlew app:assembleRelease",
+- **android:dev**: "ENVFILE=.envreact-native run-android",
+- **win-android:dev**: "SET ENVFILE=.env && react-native run-android",
+- **release:dev**: "cd android && ENVFILE=.env ./gradlew app:assembleRelease",
+- **win-release:dev**: "cd android && SET ENVFILE=.env && ./gradlew app:assembleRelease",
 - **install-release**: "cd android && adb install app/build/outputs/apk/release/app-release.apk",
-- **ios**: "react-native run-ios",
-- **gc**: "cd android && ENVFILE=.env.dev ./gradlew clean",
-- **win-gc**: "cd android && SET ENVFILE=.env.dev && gradlew clean",
+- **gc**: "cd android && ENVFILE=.env ./gradlew clean",
+- **win-gc**: "cd android && SET ENVFILE=.env && gradlew clean",
 - **start**: "react-native start",
 - **test**: "jest",
 - **lint**: "eslint .",
-- **pod**: "cd ios && pod install"
+
 
 ## RODANDO O APP
 - Abra o projeto no VsCode
@@ -74,10 +70,10 @@ Algumas delas:
 
 - Configure o Reactotron:
 
-  - Na raiz do projeto, no arquivo **.env.dev**, e apontar o seu endereço de IP para a variável **REACTOTRON_IP=**
+  - Na raiz do projeto, no arquivo **.env**, e apontar o seu endereço de IP para a variável **REACTOTRON_IP=**
     Exemplo: `REACTOTRON_IP=SeuIpAqui`
 
 - Execute o emulador previamente configurado ou [utilize um dispositivo fisíco conectado via USB](https://react-native.rocketseat.dev/usb/android)
 
 - Entre na raiz do seu projeto via terminal execute o comando :
-  `$ yarn android:dev` para MacOs ou Linux / `$yarn win-android:dev` para windows
+  `$ yarn android:dev` para Linux / `$yarn win-android:dev` para windows

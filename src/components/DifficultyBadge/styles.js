@@ -8,7 +8,7 @@ export const BadgeWrapper = styled.View`
   justify-content: space-around;
   align-items: center;
   padding: 5px;
-  width: ${s(110)}px;
+  width: ${s(120)}px;
 `;
 
 export const BadgeText = styled.Text`

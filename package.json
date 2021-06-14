@@ -8,16 +8,12 @@
     "release:dev": "cd android && ENVFILE=.env ./gradlew app:assembleRelease",
     "win-release:dev": "cd android && SET ENVFILE=.env && ./gradlew app:assembleRelease",
     "install-release": "cd android && adb install app/build/outputs/apk/release/app-release.apk",
-    "ios": "ENVFILE=.env react-native run-ios",
-    "ios-release:dev": "ENVFILE=.env react-native run-ios --configuration=release",
-    "xcclean": "cd ios && ENVFILE=.env xcodebuild clean -scheme opi -workspace opi.xcworkspace",
     "gc": "cd android && ENVFILE=.env ./gradlew clean",
     "win-gc": "cd android && SET ENVFILE=.env && gradlew clean",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "pod": "cd ios && npx pod-install",
-    "rl": "rm -rf node_modules && yarn &&yarn pod && yarn ios && yarn gc && yarn android:dev"
+    "rl": "rm -rf node_modules && yarn && yarn gc && yarn android:dev"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
@@ -25,6 +21,7 @@
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
     "axios": "^0.21.1",
+    "html-entities": "^2.3.2",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-native": "0.64.1",

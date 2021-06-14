@@ -12,6 +12,8 @@ export const Types = {
   SET_ANSWERS: 'SET_ANSWERS',
   ASYNC_SET_ANSWERS: 'ASYNC_SET_ANSWERS',
   SET_SELECTED_CATEGORY: 'SET_SELECTED_CATEGORY',
+  SET_MODAL_VISIBILITY: 'SET_MODAL_VISIBILITY',
+  SET_MODAL_ANSWER_FEEDBACK: 'SET_MODAL_ANSWER_FEEDBACK',
 };
 
 const INITIAL_STATE = {
@@ -33,7 +35,8 @@ const INITIAL_STATE = {
   },
   selectedCategory: null,
   unansweredQuestions: [],
-  answers: [],
+  modalAnswerVisible: false,
+  modalAnswerWasRight: null,
 };
 
 export default function reducer(state = INITIAL_STATE, {type, payload}) {
@@ -46,6 +49,12 @@ export default function reducer(state = INITIAL_STATE, {type, payload}) {
         ...arr,
         difficulties,
         answeredAmount,
+        answersInARow: {
+          right: 0,
+          wrong: 0,
+        },
+        difficultyBeingAnswered: 'medium',
+        answers: [],
       }));
       return {
         ...state,
@@ -60,13 +69,32 @@ export default function reducer(state = INITIAL_STATE, {type, payload}) {
       };
     }
     case Types.SET_UNANSWERED_QUESTIONS: {
-      const {newUnansweredQuestion} = payload;
+      const {newUnansweredQuestions} = payload;
       return {
         ...state,
-        unansweredQuestions: [
-          ...state.unansweredQuestions,
-          newUnansweredQuestion,
-        ],
+        unansweredQuestions: newUnansweredQuestions,
+      };
+    }
+    case Types.SET_ANSWERS: {
+      const {answers, unansweredQuestions} = payload;
+      return {
+        ...state,
+        categories: answers,
+        unansweredQuestions,
+      };
+    }
+    case Types.SET_MODAL_VISIBILITY: {
+      const {visibility} = payload;
+      return {
+        ...state,
+        modalAnswerVisible: visibility,
+      };
+    }
+    case Types.SET_MODAL_ANSWER_FEEDBACK: {
+      const {feedback} = payload;
+      return {
+        ...state,
+        modalAnswerWasRight: feedback,
       };
     }
     default:
@@ -83,44 +111,37 @@ export const asyncSetCategories = () => ({
   type: Types.ASYNC_SET_CATEGORIES,
 });
 
-export const setAnsweredQuestionsAmountByCategory =
-  answeredQuestionsAmountByCategory => ({
-    type: Types.SET_ANSWERED_QUESTIONS_AMOUNT_BY_CATEGORY,
-    payload: {answeredQuestionsAmountByCategory},
-  });
-
-export const asyncSetAnsweredQuestionsAmountByCategory = category => ({
-  type: Types.ASYNC_SET_ANSWERED_QUESTIONS_AMOUNT_BY_CATEGORY,
-  payload: {category},
-});
-
-export const setUnansweredQuestions = newUnansweredQuestion => ({
+export const setUnansweredQuestions = newUnansweredQuestions => ({
   type: Types.SET_UNANSWERED_QUESTIONS,
-  payload: {newUnansweredQuestion},
+  payload: {newUnansweredQuestions},
 });
 
-export const asyncSetUnansweredQuestions = newUnansweredQuestion => ({
+export const asyncSetUnansweredQuestions = newUnansweredQuestionCategoryId => ({
   type: Types.ASYNC_SET_UNANSWERED_QUESTIONS,
-  payload: {newUnansweredQuestion},
+  payload: {newUnansweredQuestionCategoryId},
 });
 
-export const setAnswers = answers => ({
+export const setAnswers = (answers, unansweredQuestions) => ({
   type: Types.SET_ANSWERS,
-  payload: {answers},
+  payload: {answers, unansweredQuestions},
 });
 
-export const asyncSetAnswers = (
-  answer,
-  difficulty,
-  rightAnswer,
-  date,
-  answerWasRight,
-) => ({
-  type: Types.SET_ANSWERS,
-  payload: {answer, difficulty, rightAnswer, date, answerWasRight},
+export const asyncSetAnswers = (answer, category) => ({
+  type: Types.ASYNC_SET_ANSWERS,
+  payload: {answer, category},
 });
 
 export const setSelectedCategory = category => ({
   type: Types.SET_SELECTED_CATEGORY,
   payload: {category},
+});
+
+export const setModalVisibility = visibility => ({
+  type: Types.SET_MODAL_VISIBILITY,
+  payload: {visibility},
+});
+
+export const setModalAnswerFeedback = feedback => ({
+  type: Types.SET_MODAL_ANSWER_FEEDBACK,
+  payload: {feedback},
 });

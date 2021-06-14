@@ -13,6 +13,7 @@ const Stack = createStackNavigator();
 
 const TestSas = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(asyncSetCategories());
   }, []);
