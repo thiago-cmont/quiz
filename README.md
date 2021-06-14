@@ -11,6 +11,7 @@
 - [Android Studio](https://git-scm.com/doc) para configurações do emulador Android;
 - [VsCode](https://code.visualstudio.com/) como IDE de desenvolvimento;
 - [Reactotron - v3.0](https://github.com/infinitered/reactotron) para debug;
+- Não encontrou alguma biblioteca ou versão? Todas elas podem ser encontradas no package.json da aplicação!
 
 ## AMBIENTE REACT NATIVE
 
