@@ -1,5 +1,6 @@
-# test_sas
-
+## Projeto
+A idéia desse projeto foi implementar um app de perguntas e respostas onde você resolve 10 perguntas de um determinado assunto e recebe o feedback das questões feitas. O app foi feito usando a api Opent Trivia DB (https://opentdb.com/api_config.php).
+## Tecnologias
 - [JavaScript;](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 - [React Native - v0.64;](https://reactnative.dev/)
 - [React Hooks;](https://pt-br.reactjs.org/docs/hooks-intro.html)
